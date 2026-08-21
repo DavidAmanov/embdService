@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# playwright mcp screenshots/artifacts
+.playwright-mcp/
+
+# local MCP tool config
+.mcp.json
