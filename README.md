@@ -2,6 +2,45 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Backend (Telegram order notifications)
+
+The `server/` folder is a small standalone Express server that receives order
+submissions from the "Заказать" form and forwards them (design PNG + contact
+info) to a Telegram chat via the Bot API.
+
+Setup:
+
+```bash
+cd server
+npm install
+cp .env.example .env
+```
+
+Fill in `server/.env`:
+
+```
+TELEGRAM_BOT_TOKEN=<token from @BotFather>
+TELEGRAM_ADMIN_CHAT_ID=<chat id that should receive orders>
+```
+
+To get these values:
+1. Message [@BotFather](https://t.me/BotFather) in Telegram, send `/newbot`,
+   follow the prompts — it gives you the bot token.
+2. Send any message to your new bot (bots can't message first).
+3. Open `https://api.telegram.org/bot<TOKEN>/getUpdates` in a browser and
+   read the `chat.id` field from the response — that's your admin chat id.
+
+Run both processes in development (two terminals):
+
+```bash
+npm start            # frontend, http://localhost:3000
+cd server && npm run dev   # backend, http://localhost:4000
+```
+
+The frontend calls the backend at `REACT_APP_API_URL` (defaults to
+`http://localhost:4000`); set it in a `.env` at the project root if the
+backend runs elsewhere.
+
 ## Available Scripts
 
 In the project directory, you can run:
